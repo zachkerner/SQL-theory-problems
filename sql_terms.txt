@@ -1,0 +1,17 @@
+SQL TERMS
+------------------
+
+DISTINCT - eliminates duplicate data returned from a SQL query.
+
+NULL - the absence of a value. Behaves differently from nil in Ruby as it is not 'falsy' and only returns itself in operations. Even NULL = NULL returns NULL.
+
+WHERE - filters rows. (Use original language)
+
+HAVING - filters groups. (Use original language)
+
+
+LINKS
+
+How SQL execute queries
+https://launchschool.com/lessons/a1779fd2/assignments/f4b7a9dc
+

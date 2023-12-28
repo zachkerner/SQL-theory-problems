@@ -1,0 +1,111 @@
+Provide definitions of: cardinality, modality, sequence and the rest of the terms listed on the study sheet.
+
+TERMS
+----------------------------------
+
+anomaly - data corruption brought on by the storing of duplicate data. an anomaly occurs when a database user updates, inserts or deletes values in the wrong place failing to realize the existence of repeated data
+
+
+cardinality - the umbrella category of one-to-one, one-to-many and many-to-many relationships. each describe the number of entities on a side of a relationship. an entity is a collection of real world objects like students, reviews or cars.
+
+check/constraint - a limitation on the data that a column can hold. A column with type text will not accept integers. A column with type integers will not accept floating point numbers. NOT NULL and UNIQUE are common constraints disallowing the absence of values or duplicate values respectively. Custom checks like regex or minimum (ex: price >= 0.00) may be added at table creation or later.
+
+crow's foot notation:
+
+	definition - one type of entity relationship diagram (ERD) (alternatively: entity relationship model). it is used to model entities and the relationships between them. relationships can be one to one, one to many, many to many or none. lines and circles represent modality.
+
+	draw it - (remember events and tickets) [see database diagrams video 5:55]
+
+DCL - data control language, one of the three sublanguages of SQL. DCL is the sub-language of permission. Who gets access to a database? Who can submit a SQL query to a table? Who can update, insert or delete from a table? SQL keywords of DCL include GRANT and REVOKE.
+
+DDL - data definition language, one of the three sublanguages of SQL. DDL is the sub-language of structure and schema. It refers to the number of tables, their column types and the relationships between tables among other attributes of data structure. Its SQL keywords include CREATE, ALTER, REFERENCES TO and DROP. Modifies the structure of relations.
+
+DML - data manipulation language, one of the three sublanguages of SQL. DML is the sub-language of data query and data manipulation. DML happens when a user queries the data, deletes individual rows or updates individual values. Its SQL keywords include UPDATE, DELETE, SELECT and INSERT.
+
+default value - a value entered into a relation's data if no value is given. Given values (typically recored with an INSERT statement) override default values. Default values are optional.
+
+joins:
+
+	general - JOIN allows us to query data from multiple relations, enabling us to access normalized data stored across numerous tables. Foreign keys forge relationships between tables that JOIN exploits in order to return SQL queries across multiple relations.
+
+	INNER - joins all rows matching the join condition (the condition following the SQL keyword ON). The resulting transient table is the intersection of the two tables (the overlapping portion of a Venn diagram).
+	
+	LEFT (LEFT OUTER) - Returns a transient table with all of the rows of the LEFT table or table referenced after the FROM plus all of the matching rows attaching them to the second table. Matching rows are determined by the JOIN condition. (The table referenced after the ON is the RIGHT table). Rows that do not match the JOIN condition are populated by NULL.
+	
+	RIGHT (RIGHT OUTER) - The reverse of the LEFT OUTER JOIN. It returns a transient table with all of the rows of the RIGHT table or table referenced after the ON plus all of the matching rows attaching them to the first table. (The table referenced after the FROM is the LEFT table). Rows that do not match the JOIN condition are populated by NULL.
+
+	FULL - A FULL JOIN returns all columns of both right and left table. It combines a LEFT (OUTER) JOIN with a RIGHT (OUTER) JOIN. In practice this type of JOIN is rare.
+	
+	CROSS - Returns a table with every row of the LEFT table crossed with every row in the RIGHT table. Typically returns impractical results. In practice this type of JOIN is rare.
+
+join table - A table that holds foreign keys pointing to the primary keys of entities that are in a many-to-many relationship. 
+
+
+keys: 
+	foreign - a means to link a row in one relation to a row in another relation, typically a primary key
+
+	natural - a value already existing in a data set that can be used to uniquely identify rows. The trouble is that most natural keys do not conform to the standards of PRIMARY KEYs. Often natural keys are duplicate (PRIMARY KEYs must be UNIQUE) or some rows do not have a corresponding natural key (like a land line phone number). NULL values are unable to uniquely identify rows. 
+
+	primary - a column that provides unique and non-null IDs for each row, often serves as reference of another relation's foreign key.
+
+	surrogate - a value added to a table in order to uniquely identify rows of data. It often obviates the problems associated with natural keys because it is engineered for the purpose of identification. The serial data type, an auto-incrementing integer, is a good candidate for a data type suitable for surrogate keys.
+
+modality - the necessity of a relationship. for example events and tickets can be said to have a one to many relationship any event has multiple tickets but an event need not have tickets as there are free events or events like fireworks that are open to the general public.
+
+
+normalization - duplicate data leads to data corruption. normalization is the process of a splitting larger relations into smaller relations to cut down on data duplication and ensure data integrity. tables are then given primary and foreign keys to establish relationships between them.
+
+**************
+
+many-to-many - when multiple entities map to multiple entities. directors and films from the problem sets come to mind. some films (like a Coen brothers film) has multiple directors. sometimes directors change hands if production is unhappy with them. In crow's foot notation, a many to many relationship is marked by a line that branches into three on both sides. Many to many relationships are realized in SQL with a join table, a relation that contains foreign key references to the primary key of each entity.
+
+one-to-many - when an entity maps to many other entities. for example a book and reviews. each book can have many reviews ('5 stars best book ever!', '1 star this author stinks!') but each review has only one book. In crow's foot notation, a one to many relationship is marked by a line that branches into three on one side.
+
+one-to-one - when an entity maps to just one other entity, a rare relationship in the real world. perhaps a neuroscience lab performing experiments on human cadavers could map a one to one relationship between brains and cadavers since each cadaver has only one brain and each brain has only one cadaver. In crow's foot notation. a one to one relationship is marked by a line.
+
+**************
+
+optimization - the skill or perhaps art of crafting efficient SQL responses. SQL response times can vary. Large databases may demand optimized queries to function. Optimization involves rewriting code to speed up the time of execution. Different queries/data structures can dramatically impact performance.
+
+referential integrity - databases uphold referential integrity by ensuring that every foreign key references an actual primary key stored in another relation. errors are raised by SQL when referential integrity is violated.
+
+relation - a table, not to be confused with 'relationship'
+
+relationship - On a conceptual level a relationship is a link between entities. On a physical level it is a link between the relations or tables that represents those entities. Some of the ways to establish relationships in data include foreign keys and the making of join tables.
+
+schema:
+
+	general - a mental model for the purpose of organizing databases. It has three levels of increasing detail from the high level conceptual to the low level physical and the medium level logical sandwiched in between. 
+
+	conceptual - This is a highest level model of the three levels of schema. Its purpose is to broadly identify entities and figure out how they relate to one another and what sort of relationship each entity has to each other.
+
+	logical - Between conceptual and physical. Rarely used.
+
+	physical - The lowest level model of the three levels of schema. The physical level gets into the nitty-gritty low level details of the entities themselves. What sort of columns will each entity have? What sort of data type is best for each column? The physical level is geared towards implementation. Sometimes the number of tables in the physical level will exceed the number of entities in the conceptual model. This happens when entities have a many-to-many relationship which requires a join table.
+
+
+sequence* - a relation that produces a series of numbers. It is often used as a surrogate key to generate unique ids for rows. Sequences call a function called nextval that automatically increments (or decrements) according to the rules laid out by the user. This ensures that each sequence value is UNIQUE and NOT NULL. Sequences are part of DDL. "CREATE SEQUENCE statements modify the characteristics and attributes of a database by adding a sequence object to the database structure."
+
+*[see: Lesson 2: Using Keys]
+
+SQL
+
+	language - SQL is a special purpose programming language meaning that it is not used to for a wide variety of purpose (ex: creating a chat app or a video game). It is used exclusively to interact with relational databases. 
+
+It is also a declarative language. We do not tell SQL which search algorithms to execute or other details of how to carry out our request. We merely tell SQL what we want and it abstracts the details away from us.
+
+	statement - any declaration in SQL whether it creates, reads, updates or destroys. SQL statements can update data or change the structure of data, for example with an ALTER TABLE statement.
+
+	query - a subcategory of SQL statements. A query returns data according to the commands requested. It does not write, alter or update the data. Neither does it update, alter or change the structure of the data.
+
+subquery - A query within another query, a nested query. Often more efficient than an equivalent query with a JOIN clause. A subquery returns an initial query then goes on to use that query for a further query.
+
+transient table - A mental model that helps in understanding the inner working of JOIN. A transient table is the product of a JOIN statement that returns matching columns with all columns of the relation after FROM. SQL goes on to use this transient table in further calls to JOIN. Often times multiple JOINs are needed.
+
+
+
+
+
+
+
+

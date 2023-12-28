@@ -1,0 +1,116 @@
+Import file (from terminal):
+
+psql -d data_base < file_name.sql 
+
+Import file (from psql):
+
+\i ~/Desktop/LS180/file_name.sql
+
+Connect to database:
+
+psql -d database_name
+
+META COMMANDS:
+
+Switch databases:
+
+\c database_name [\c is short for connect]
+
+Display all databases:
+
+\l [short for list]
+
+Display all relations(tables) within a database:
+
+\dt [short for display tables]
+
+-----------------------------
+=============================
+-----------------------------
+
+SQL COMMANDS
+
+ADD CHECK to existing column:
+
+ALTER TABLE orders
+ADD CHECK (length(customer_name) > 1);
+
+-----OR-----
+
+ALTER TABLE films 
+ADD CONSTRAINT title_length 
+CHECK (length(title) >= 1);
+
+**********
+
+auto-incrementing column
+
+	serial
+
+**********
+
+Set DEFAULT for existing column:
+
+ALTER TABLE orders
+ALTER COLUMN customer_name
+SET DEFAULT 'John Shmoe';
+
+***********
+
+Set NOT NULL for existing column:
+
+ALTER TABLE orders
+ALTER COLUMN customer_name SET NOT NULL;
+
+**********
+
+Set UNIQUE for existing column:
+
+ALTER TABLE orders
+ADD UNIQUE (customer_name);
+
+-----OR-----
+
+ALTER TABLE films
+ADD CONSTRAINT title_unique UNIQUE (title);
+
+
+**********
+
+
+RENAME TABLE:
+
+ALTER TABLE orders
+RENAME TO all_orders;
+
+RENAME COLUMN:
+
+ALTER TABLE orders
+RENAME COLUMN sides TO side_dishes;
+
+
+*****************
+
+Set primary key
+
+id serial PRIMARY KEY
+
+*************
+
+FK - create
+
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+
+
+********
+
+FK - drop
+
+DROP CONSTRAINT name_of_constraint 
+
